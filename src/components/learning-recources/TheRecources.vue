@@ -1,13 +1,19 @@
 <template>
   <base-card>
-    <base-button @click="setSelectedTab('stored-recources')" :mode="storedResButtonMode"
+    <base-button
+      @click="setSelectedTab('stored-recources')"
+      :mode="storedResButtonMode"
       >Stored Recources</base-button
     >
-    <base-button @click="setSelectedTab('add-recource')" :mode="addResButtonMode"
+    <base-button
+      @click="setSelectedTab('add-recource')"
+      :mode="addResButtonMode"
       >Add Recource</base-button
     >
   </base-card>
-  <component :is="selectedTab"></component>
+  <KeepAlive>
+    <component :is="selectedTab"></component>
+  </KeepAlive>
 </template>
 
 <script>
@@ -39,21 +45,32 @@ export default {
     };
   },
   computed: {
-    storedResButtonMode(){
-        return this.selectedTab === 'stored-recources' ? null : 'flat'
+    storedResButtonMode() {
+      return this.selectedTab === 'stored-recources' ? null : 'flat';
     },
-    addResButtonMode(){
-        return this.selectedTab === 'add-recource' ? null : 'flat'
-    }
-  },    
-  provide(){
+    addResButtonMode() {
+      return this.selectedTab === 'add-recource' ? null : 'flat';
+    },
+  },
+  provide() {
     return {
-        recources: this.storedRecources
-    }
+      recources: this.storedRecources,
+      addRecource: this.addRecource,
+    };
   },
   methods: {
     setSelectedTab(tab) {
       this.selectedTab = tab;
+    },
+    addRecource(title, desc, url) {
+      const newReacource = {
+        id: new Date().toISOString(),
+        title,
+        description: desc,
+        link: url,
+      };
+      this.storedRecources.unshift(newReacource);
+      this.selectedTab = 'stored-recources';
     },
   },
 };
