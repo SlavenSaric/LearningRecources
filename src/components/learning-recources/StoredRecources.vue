@@ -8,7 +8,7 @@
     import LearningRecource from './LearningRecource.vue';
 
     export default {
-        props: ['recources'],
+        inject: ['recources'],
         components: {
             LearningRecource
         }

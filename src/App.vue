@@ -1,34 +1,18 @@
 <template>
     <the-header title="Rmember Me"></the-header>
-    <stored-recources :recources="storedRecources"></stored-recources>
+    <!-- <stored-recources :recources="storedRecources"></stored-recources> -->
+    <the-recources></the-recources>
 </template>
 
 <script>
-import StoredRecources from './components/learning-recources/StoredRecources.vue';
+import TheRecources from './components/learning-recources/TheRecources.vue';
 import TheHeader from './components/leyouts/TheHeader.vue';
 export default {
     components:{
-        StoredRecources,
+        TheRecources,
         TheHeader
     } ,
-  data() {
-    return {
-      storedRecources: [
-        {
-          id: 'official-guide',
-          title: 'Official Guide',
-          description: 'The Official Vue.js Documentation',
-          link: 'https://vuejs.org',
-        },
-        {
-          id: 'google',
-          title: 'Google',
-          description: 'Learn how to google',
-          link: 'https://www.google.de',
-        },
-      ],
-    };
-  },
+  
 };
 </script>
 
