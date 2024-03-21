@@ -1,15 +1,12 @@
 <template>
-  <ul>
-    <learning-recource v-for="res in storedRecources" :key="res.id" :title="res.title" :description="res.description" :link="res.link"></learning-recource>
-  </ul>
+    <stored-recources :recources="storedRecources"></stored-recources>
 </template>
 
 <script>
-import LearningRecource from './components/learning-recources/LearningRecource.vue'
-
+import StoredRecources from './components/learning-recources/StoredRecources.vue';
 export default {
     components:{
-        LearningRecource
+        StoredRecources
     } ,
   data() {
     return {
@@ -31,3 +28,19 @@ export default {
   },
 };
 </script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+</style>
