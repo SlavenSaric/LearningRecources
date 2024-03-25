@@ -1,4 +1,13 @@
 <template>
+  <base-dialog v-if="inputIsInvalid" title="Invalid Input" @close="confirmError">
+  <template #default>
+    <p>Infortunately, at leat one input is invalid</p>
+    <p>Please check your input and make sure you enter a few characters into each field</p>
+  </template>
+  <template #actions>
+    <base-button @click="confirmError">Okay</base-button>
+  </template>
+</base-dialog>
   <base-card>
     <form @submit.prevent="submitData">
       <div class="form-control">
@@ -23,13 +32,26 @@
 <script>
     export default {
         inject: ['addRecource'],
+        data(){
+          return {
+            inputIsInvalid: false
+          }
+        },
         methods: {
             submitData(){
                 const enteredTitle = this.$refs.titleInput.value
                 const enteredDesc = this.$refs.descInput.value
                 const enteredLink = this.$refs.linkInput.value
 
+                if(enteredTitle.trim() === '' || enteredDesc.trim() === '' || enteredLink.trim() === ''){
+                  this.inputIsInvalid = true
+                  return
+                }
+
                 this.addRecource(enteredTitle, enteredDesc, enteredLink)
+            },
+            confirmError(){
+              this.inputIsInvalid = false
             }
         }
     }
