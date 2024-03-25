@@ -56,6 +56,7 @@ export default {
     return {
       recources: this.storedRecources,
       addRecource: this.addRecource,
+      deleteRecource: this.removeRecource
     };
   },
   methods: {
@@ -72,6 +73,10 @@ export default {
       this.storedRecources.unshift(newReacource);
       this.selectedTab = 'stored-recources';
     },
+    removeRecource(resId){
+      const resIndex = this.storedRecources.findIndex(res => res.id === resId)
+      this.storedRecources.splice(resIndex, 1)
+    }
   },
 };
 </script>
